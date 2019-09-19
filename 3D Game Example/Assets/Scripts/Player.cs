@@ -2,20 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class player1 : MonoBehaviour
+public class Player : MonoBehaviour
 {
+    int maxJumpCount = 1;
+
     // Start is called before the first frame update
     public Rigidbody rb;
 
+    //private bool isJumpPressed = false;
+    //private bool isLeftPressed = false;
+    //private bool isRightPressed = false;
 
-    private bool isJumpPressed = false;
-    private bool isLeftPressed = false;
-    private bool isRightPressed = false;
+    private KeyCode KeyLeft = KeyCode.A;
+    private KeyCode KeyRight = KeyCode.D;
+    private KeyCode KeyJump = KeyCode.W;
+    private KeyCode KeyFire = KeyCode.Space;
 
     private float moveSpeed = 5.0f;
 
     private float time = 0.0f;
-    private bool hasJumped = false;
+    private int hasJumped = 0;
+    private float jiggleAmount = 1.5f;
 
     private MaterialPropertyBlock materialBlock;
     private Renderer renderer;
@@ -26,7 +33,7 @@ public class player1 : MonoBehaviour
     private float health = 1.0f;
 
     GameObject Ground;
-
+    GameObject thisObject;
 
     void Start()
     {
@@ -34,78 +41,131 @@ public class player1 : MonoBehaviour
 
         colourOriginal = renderer.material.color;
         colourSeverlyDamaged = Color.red;
-        //colourCurrent = new Color(colourOriginal.r, colourOriginal.g, colourOriginal.b);
         
-
         rb = GetComponent<Rigidbody>();
         Ground = GameObject.Find("GroundPlane");
+        thisObject = GameObject.Find(this.name);
 
         materialBlock = new MaterialPropertyBlock();
+
+        //FallFaster();
     }
 
     void Update()
     {
-        isJumpPressed = Input.GetKeyDown(KeyCode.W);
-        isLeftPressed = Input.GetKey(KeyCode.A);
-        isRightPressed = Input.GetKey(KeyCode.D);
+        //isJumpPressed = Input.GetKeyDown(KeyCode.W);
+        //isLeftPressed = Input.GetKey(KeyCode.A);
+        //isRightPressed = Input.GetKey(KeyCode.D);
+
+        if (hasJumped > 0 && rb.velocity.y <= 100)
+        {
+            FallFaster();
+        }
+    }
+
+    void OnGUI()
+    {
+        GUILayout.Label((KeyLeft == KeyCode.A).ToString());
     }
 
     void FixedUpdate()
     {
+        DoKeyEvents();
+    }
 
-        if (isJumpPressed)
-        {
-            if (!hasJumped)
-            {
-                Jump();
-                hasJumped = true;
-            }
-        }
-
-        if (isLeftPressed)
-        {
-            //rb.velocity = new Vector3(0, rb.velocity.y, rb.velocity.z);
-            rb.AddForce(-moveSpeed, 0, 0, ForceMode.VelocityChange);
-        }
-
-        if (isRightPressed)
-        {
-            //rb.velocity = new Vector3(0, rb.velocity.y, rb.velocity.z);
-            rb.AddForce(moveSpeed, 0, 0, ForceMode.VelocityChange);
-        }
-
-        if (hasJumped && rb.velocity.y <= 4)
-        {
-            FallFaster();
-        }
-
+    private void TenSeconds()
+    {
         time = time + Time.fixedDeltaTime;
         if (time > 10.0f)
         {
             time = 0.0f;
         }
+    }
 
+    public void AssignKeys(KeyCode left, KeyCode right, KeyCode jump, KeyCode fire)
+    {
+        KeyLeft = left;
+        KeyRight = right;
+        KeyJump = jump;
+        KeyFire = fire;
+    }
+
+    public void DoKeyEvents()
+    {
+        DoKeyEvents(KeyJump, Input.GetKeyDown(KeyJump));
+        DoKeyEvents(KeyLeft, Input.GetKey(KeyLeft));
+        DoKeyEvents(KeyRight, Input.GetKey(KeyRight));
+        DoKeyEvents(KeyFire, Input.GetKey(KeyFire));
+    }
+
+   // public void DoKeyEvents(bool isJumpPressed, bool isLeftPressed, bool isRightPressed, bool isFirePressed)
+    public void DoKeyEvents(KeyCode key, bool isPressed)
+    {
+        //Debug.Log(key.ToString());
+
+        if (key == KeyJump && isPressed)
+        {
+            Debug.Log("key JUMP");
+            if (hasJumped < maxJumpCount)
+            {
+                Jump();
+                hasJumped++;
+            }
+        }
+
+        else if (key == KeyLeft && isPressed)
+        {
+            Debug.Log("key left");
+            //rb.velocity = new Vector3(0, rb.velocity.y, rb.velocity.z);
+            rb.AddForce(-moveSpeed, 0, 0, ForceMode.VelocityChange);
+        }
+
+        else if (key == KeyRight && isPressed)
+        {
+            Debug.Log("key right");
+            //rb.velocity = new Vector3(0, rb.velocity.y, rb.velocity.z);
+            rb.AddForce(moveSpeed, 0, 0, ForceMode.VelocityChange);
+        }
+
+        else if(key == KeyFire && isPressed)
+        {
+            Debug.Log("key fire");
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
+        //dont move in the z direction
+        rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, 0);
+
         if (collision.gameObject.name == "GroundPlane")
         {
-            //Bounce();
-            PlayerHit(collision);
+            //Debug.Log("Touched Ground");
+            hasJumped = 0;
 
-            hasJumped = false;
+            PlayerHit(collision);
         }
     }
 
-    private void FallFaster()
+    public void FallFaster()
     {
-        rb.AddForce(0, -4.0f, 0, ForceMode.VelocityChange);
+        //Debug.Log("FallFaster");
+        rb.AddForce(0, -5.0f, 0, ForceMode.VelocityChange);
+
+        //rb.AddForce(0, -100.0f, 0, ForceMode.Acceleration);
+    }
+
+    private void StopJump()
+    {
+        rb.velocity = new Vector3(0, 0, 0);
     }
 
     private void Jump()
     {
-        rb.velocity = new Vector3(0, 80, 0);
+        //rb.velocity = new Vector3(0, 0, 0);
+        rb.AddForce(0, 80.0f, 0, ForceMode.Impulse);
+        //rb.AddForce(0, -800.0f, 0, ForceMode.Acceleration);
+        Jiggle();
     }
 
     private void Bounce()
@@ -115,7 +175,7 @@ public class player1 : MonoBehaviour
 
     private void BounceSmall()
     {
-        rb.velocity = new Vector3(0, 80, 0);
+        rb.velocity = new Vector3(0, 10, 0);
     }
 
     protected void PlayerHit(Collision collision)
@@ -123,11 +183,18 @@ public class player1 : MonoBehaviour
         health -= 0.1f;
         if (health <= 0)
             health = 1.0f;
-        Debug.Log(health);
 
         colourCurrent = Color.Lerp(colourSeverlyDamaged, colourOriginal, health);
         materialBlock.SetColor("_Color", colourCurrent);
         renderer.SetPropertyBlock(materialBlock);
+
+       // Jiggle();
+    }
+
+    protected void Jiggle()
+    {
+
+        iTween.PunchScale(thisObject, new Vector3(jiggleAmount, jiggleAmount, jiggleAmount), 0.5f);
     }
 }
 
