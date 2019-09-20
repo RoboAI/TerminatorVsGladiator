@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    int maxJumpCount = 1;
+    int maxJumpCount = 3;
 
     // Start is called before the first frame update
     public Rigidbody rb;
@@ -57,10 +58,7 @@ public class Player : MonoBehaviour
         //isLeftPressed = Input.GetKey(KeyCode.A);
         //isRightPressed = Input.GetKey(KeyCode.D);
 
-        if (hasJumped > 0 && rb.velocity.y <= 100)
-        {
-            FallFaster();
-        }
+        DoKeyEvents();
     }
 
     void OnGUI()
@@ -70,7 +68,11 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        DoKeyEvents();
+
+        if (hasJumped > 0 && rb.velocity.y <= 100)
+        {
+            FallFaster();
+        }
     }
 
     private void TenSeconds()
@@ -136,13 +138,16 @@ public class Player : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         //dont move in the z direction
-        rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, 0);
+        //rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, 0);
 
         if (collision.gameObject.name == "GroundPlane")
         {
             //Debug.Log("Touched Ground");
             hasJumped = 0;
+        }
 
+        else if(collision.gameObject.name.StartsWith("Player_"))
+        {
             PlayerHit(collision);
         }
     }
@@ -187,13 +192,12 @@ public class Player : MonoBehaviour
         colourCurrent = Color.Lerp(colourSeverlyDamaged, colourOriginal, health);
         materialBlock.SetColor("_Color", colourCurrent);
         renderer.SetPropertyBlock(materialBlock);
-
-       // Jiggle();
+        Stopwatch stopwatch = new Stopwatch();
+        Jiggle();
     }
 
     protected void Jiggle()
     {
-
         iTween.PunchScale(thisObject, new Vector3(jiggleAmount, jiggleAmount, jiggleAmount), 0.5f);
     }
 }
