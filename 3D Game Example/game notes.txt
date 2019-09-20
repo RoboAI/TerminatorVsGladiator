@@ -1,0 +1,32 @@
+-1.3 to 1.3
+-17 to +17
+-7.8 to +7.8
+
+cloud_1 : -57.1
+cloud_2 :
+cloud_3 :
+
+cloud x right = 45
+
+8.13 sphere z
+
+platforms should check for collision: then, if top part has touched the object, then callback the collided object so that object can reset hasJumped=0 so it can carry on jumping.
+
+void onPacketReceived(){
+	StopWatch stopWatch = new StopWatch();
+
+	stopWatch.Start();
+
+	long time = 0;
+	string s = "jump,30";
+    string[] ss = s.Split(',');
+    KeyCode key = getKeyCode(ss[0]);
+    int.TryParse(ss[1], out int ping);
+
+    stopWatch.Stop();
+
+    time = stopWatch.elapsedMilliseconds + ping;
+}
+
+when keydown, packet should be "[ping],jump"
+when player lands on platform, packet should be "[ping],platform_x,xpos,ypos,zpos,xrot,yrot,zrot,xvel,yvel,zvel"

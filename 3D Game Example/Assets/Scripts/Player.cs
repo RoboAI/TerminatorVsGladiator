@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -192,7 +191,7 @@ public class Player : MonoBehaviour
         colourCurrent = Color.Lerp(colourSeverlyDamaged, colourOriginal, health);
         materialBlock.SetColor("_Color", colourCurrent);
         renderer.SetPropertyBlock(materialBlock);
-        Stopwatch stopwatch = new Stopwatch();
+
         Jiggle();
     }
 
