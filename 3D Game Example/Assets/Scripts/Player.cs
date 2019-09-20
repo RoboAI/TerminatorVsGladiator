@@ -62,7 +62,7 @@ public class Player : MonoBehaviour
 
     void OnGUI()
     {
-        GUILayout.Label((KeyLeft == KeyCode.A).ToString());
+        //GUILayout.Label((KeyLeft == KeyCode.A).ToString());
     }
 
     void FixedUpdate()

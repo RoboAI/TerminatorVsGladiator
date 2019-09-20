@@ -8,9 +8,32 @@ cloud_3 :
 
 cloud x right = 45
 
-8.13 sphere z
+
+big sphere -60, 21.97, -9
+
+3D camera
+camera 7.9,25,83.8
+camera size 5
+
+2D camera
+camera LEFT -7.2, 25, 83.8
+camera RIGHT 7.2, 25, 83.8
+camera size 25
+
+sheild
+rotation 21.615, 93.877, 84.747
+position -25.89, 9.89, -9
+
 
 platforms should check for collision: then, if top part has touched the object, then callback the collided object so that object can reset hasJumped=0 so it can carry on jumping.
+
+
+small sphere follows player in front to show bullet loaded. fire bullet, then spawn another at same following-point.
+when firing bullet, use iTween to modify x-scale to animate streching.
+
+--------------------------------------------------
+when keydown, packet should be "[ping],jump"
+when player lands on platform, packet should be "[ping],platform_x,xpos,ypos,zpos,xrot,yrot,zrot,xvel,yvel,zvel"
 
 void onPacketReceived(){
 	StopWatch stopWatch = new StopWatch();
@@ -27,6 +50,5 @@ void onPacketReceived(){
 
     time = stopWatch.elapsedMilliseconds + ping;
 }
+--------------------------------------------------
 
-when keydown, packet should be "[ping],jump"
-when player lands on platform, packet should be "[ping],platform_x,xpos,ypos,zpos,xrot,yrot,zrot,xvel,yvel,zvel"
