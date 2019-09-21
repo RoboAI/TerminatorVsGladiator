@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    int maxJumpCount = 3;
+    public float health = 1.0f;
+    public float moveSpeed = 1.5f;
+    public float jiggleAmount = 1f;
+    public float jiggleTime = 0.5f;
+    public int maxJumpCount = 2;
 
     // Start is called before the first frame update
     public Rigidbody rb;
@@ -18,11 +22,7 @@ public class Player : MonoBehaviour
     private KeyCode KeyJump = KeyCode.W;
     private KeyCode KeyFire = KeyCode.Space;
 
-    private float moveSpeed = 5.0f;
-
-    private float time = 0.0f;
     private int hasJumped = 0;
-    private float jiggleAmount = 3f;
 
     private MaterialPropertyBlock materialBlock;
     private Renderer renderer;
@@ -30,12 +30,11 @@ public class Player : MonoBehaviour
     Color colourSeverlyDamaged;
     Color colourCurrent;
 
-    private float health = 1.0f;
-
-    GameObject Ground;
     GameObject thisObject;
     Player thisPlayer;
     BulletController bulletController;
+
+    private float time = 0.0f;
 
     void Start()
     {
@@ -45,7 +44,6 @@ public class Player : MonoBehaviour
         colourSeverlyDamaged = Color.red;
         
         rb = GetComponent<Rigidbody>();
-        Ground = GameObject.Find("GroundPlane");
         thisObject = GameObject.Find(this.name);
         thisPlayer = thisObject.GetComponent<Player>();
 
@@ -63,23 +61,28 @@ public class Player : MonoBehaviour
         //isLeftPressed = Input.GetKey(KeyCode.A);
         //isRightPressed = Input.GetKey(KeyCode.D);
 
+
         bulletController.transform.position = thisPlayer.transform.position;
 
         DoKeyEvents();
+
+
     }
 
     void OnGUI()
     {
         //GUILayout.Label((KeyLeft == KeyCode.A).ToString());
-    }
-
-    void FixedUpdate()
-    {
 
         if (hasJumped > 0 && rb.velocity.y <= 100)
         {
             FallFaster();
         }
+    }
+
+    void FixedUpdate()
+    {
+
+
     }
 
     private void TenSeconds()
@@ -150,7 +153,14 @@ public class Player : MonoBehaviour
         if (collision.gameObject.name == "GroundPlane")
         {
             //Debug.Log("Touched Ground");
-            hasJumped = 0;
+            if (Input.GetKey(KeyJump))
+            {
+                Debug.Log("welkjfhadsgsd,bfsgfsrfd");
+                Jump();
+                //hasJumped--;
+            }
+            else
+                hasJumped = 0;
         }
 
         else if(collision.gameObject.tag == "Platform")
@@ -177,7 +187,7 @@ public class Player : MonoBehaviour
     public void FallFaster()
     {
         //Debug.Log("FallFaster");
-        rb.AddForce(0, -5.0f, 0, ForceMode.VelocityChange);
+        rb.AddForce(0, -1.0f, 0, ForceMode.VelocityChange);
 
         //rb.AddForce(0, -100.0f, 0, ForceMode.Acceleration);
     }
@@ -190,9 +200,9 @@ public class Player : MonoBehaviour
     private void Jump()
     {
         //rb.velocity = new Vector3(0, 0, 0);
-        rb.AddForce(0, 80.0f, 0, ForceMode.Impulse);
+        rb.AddForce(0, 40.0f, 0, ForceMode.Impulse);
         //rb.AddForce(0, -800.0f, 0, ForceMode.Acceleration);
-        Jiggle();
+        //Jiggle();
     }
 
     private void Bounce()
@@ -220,7 +230,7 @@ public class Player : MonoBehaviour
 
     protected void Jiggle()
     {
-        iTween.PunchScale(thisObject, new Vector3(jiggleAmount, jiggleAmount, jiggleAmount), 0.5f);
+        iTween.PunchScale(thisObject, new Vector3(jiggleAmount, jiggleAmount, jiggleAmount), jiggleTime);
     }
 
     public void FireBullet(Bullet bullet)

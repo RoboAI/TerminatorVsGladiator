@@ -7,8 +7,8 @@ public class Camera : MonoBehaviour
     Player player1;
     Player player2;
 
-    float maxLeft = -7.2f;
-    float maxRight = 7.2f;
+    float maxLeft = -1.95f;
+    float maxRight = 1.95f;
 
     Vector3 positionVector = new Vector3();
 
@@ -25,20 +25,36 @@ public class Camera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        MoveToPlayer(player1);
     }
 
     private void FixedUpdate()
     {
-        MoveToPlayer(player1);
+        
     }
 
     void MoveToPlayer(Player player)
     {
-        if (player1.transform.position.x >= -7.2f && player1.transform.position.x <= 7.2)
+        positionVector.Set(player1.transform.position.x, transform.position.y, transform.position.z);
+        transform.position = positionVector;
+
+        if(transform.position.x <= maxLeft)
         {
-            positionVector.Set(player1.transform.position.x, transform.position.y, transform.position.z);
+            positionVector.Set(maxLeft, transform.position.y, transform.position.z);
             transform.position = positionVector;
         }
+        else if(transform.position.x >= maxRight)
+        {
+            positionVector.Set(maxRight, transform.position.y, transform.position.z);
+            transform.position = positionVector;
+        }
+
+        //if (transform.position.x >= maxLeft && transform.position.x <= maxRight)
+        //{
+        //    positionVector.Set(player1.transform.position.x, transform.position.y, transform.position.z);
+        //    transform.position = positionVector;
+        //}
+
 
     }
 }

@@ -15,10 +15,19 @@ big sphere -60, 21.97, -9
 camera 7.9,25,83.8
 camera size 5
 
+3D camera scaled down
+camera LEFT -2, 4, -16.85
+camera RIGHT 2, 4, -16.85
+FOV 33
+
 2D camera
 camera LEFT -7.2, 25, 83.8
 camera RIGHT 7.2, 25, 83.8
 camera size 25
+
+2D camera scaled down
+camera LEFT -3.8, 24.1, 20
+camera RIGHT 3.75, 24.1, 20
 
 sheild 3d
 rotation 21.615, 93.877, 84.747

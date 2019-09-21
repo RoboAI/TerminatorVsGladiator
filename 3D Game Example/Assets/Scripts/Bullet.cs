@@ -5,7 +5,8 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public Rigidbody rb;
-    float time;
+    public float time;
+    public float speed = 10;
 
     // Start is called before the first frame update
     void Start()
@@ -37,7 +38,7 @@ public class Bullet : MonoBehaviour
         if (time > 0.1f)
         {
             time = 0.0f;
-            rb.AddForce(0, -500, 0);
+            rb.AddForce(0, speed, 0);
         }
     }
 }
