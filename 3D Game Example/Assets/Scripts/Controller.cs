@@ -22,6 +22,8 @@ public class Controller : MonoBehaviour
 
         Player1.AssignKeys(KeyCode.A, KeyCode.D, KeyCode.W, KeyCode.Space);
         Player2.AssignKeys(KeyCode.LeftArrow, KeyCode.RightArrow, KeyCode.UpArrow, KeyCode.M);
+
+        //GameObject.Find("Quad").GetComponent<Shield>().AssignPlayer(Player1);
     }
 
     // Update is called once per frame

@@ -22,7 +22,7 @@ public class Player : MonoBehaviour
 
     private float time = 0.0f;
     private int hasJumped = 0;
-    private float jiggleAmount = 1.5f;
+    private float jiggleAmount = 3f;
 
     private MaterialPropertyBlock materialBlock;
     private Renderer renderer;
@@ -34,6 +34,8 @@ public class Player : MonoBehaviour
 
     GameObject Ground;
     GameObject thisObject;
+    Player thisPlayer;
+    BulletController bulletController;
 
     void Start()
     {
@@ -45,8 +47,12 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         Ground = GameObject.Find("GroundPlane");
         thisObject = GameObject.Find(this.name);
+        thisPlayer = thisObject.GetComponent<Player>();
 
         materialBlock = new MaterialPropertyBlock();
+
+        bulletController = GameObject.Find("BulletShooter").GetComponent<BulletController>();
+        bulletController.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y, this.gameObject.transform.position.z);
 
         //FallFaster();
     }
@@ -56,6 +62,8 @@ public class Player : MonoBehaviour
         //isJumpPressed = Input.GetKeyDown(KeyCode.W);
         //isLeftPressed = Input.GetKey(KeyCode.A);
         //isRightPressed = Input.GetKey(KeyCode.D);
+
+        bulletController.transform.position = thisPlayer.transform.position;
 
         DoKeyEvents();
     }
@@ -145,7 +153,22 @@ public class Player : MonoBehaviour
             hasJumped = 0;
         }
 
+        else if(collision.gameObject.tag == "Platform")
+        {
+            hasJumped = 0;
+        }
+
         else if(collision.gameObject.name.StartsWith("Player_"))
+        {
+            PlayerHit(collision);
+        }
+
+        else if(collision.gameObject.name == "Bullet")
+        {
+            //Physics.IgnoreCollision(thisObject.GetComponent<Collider>(), collision.collider);
+        }
+
+        else if (collision.gameObject.name.StartsWith("Bullet"))
         {
             PlayerHit(collision);
         }
@@ -198,6 +221,11 @@ public class Player : MonoBehaviour
     protected void Jiggle()
     {
         iTween.PunchScale(thisObject, new Vector3(jiggleAmount, jiggleAmount, jiggleAmount), 0.5f);
+    }
+
+    public void FireBullet(Bullet bullet)
+    {
+
     }
 }
 

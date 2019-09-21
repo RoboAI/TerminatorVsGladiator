@@ -20,9 +20,12 @@ camera LEFT -7.2, 25, 83.8
 camera RIGHT 7.2, 25, 83.8
 camera size 25
 
-sheild
+sheild 3d
 rotation 21.615, 93.877, 84.747
 position -25.89, 9.89, -9
+
+shield QUAD
+rotation 35.249, -45, 30
 
 
 platforms should check for collision: then, if top part has touched the object, then callback the collided object so that object can reset hasJumped=0 so it can carry on jumping.
