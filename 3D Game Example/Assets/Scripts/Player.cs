@@ -5,17 +5,13 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public float health = 1.0f;
-    public float moveSpeed = 1.5f;
+    public float moveSpeed = 10.5f;
     public float jiggleAmount = 1f;
     public float jiggleTime = 0.5f;
     public int maxJumpCount = 2;
 
     // Start is called before the first frame update
     public Rigidbody rb;
-
-    //private bool isJumpPressed = false;
-    //private bool isLeftPressed = false;
-    //private bool isRightPressed = false;
 
     private KeyCode KeyLeft = KeyCode.A;
     private KeyCode KeyRight = KeyCode.D;
@@ -66,22 +62,22 @@ public class Player : MonoBehaviour
 
         DoKeyEvents();
 
-
+        
     }
 
     void OnGUI()
     {
         //GUILayout.Label((KeyLeft == KeyCode.A).ToString());
 
-        if (hasJumped > 0 && rb.velocity.y <= 100)
-        {
-            FallFaster();
-        }
+
     }
 
     void FixedUpdate()
     {
-
+        if (rb.velocity.y < 0)
+        {
+            FallFaster();
+        }
 
     }
 
@@ -187,7 +183,7 @@ public class Player : MonoBehaviour
     public void FallFaster()
     {
         //Debug.Log("FallFaster");
-        rb.AddForce(0, -1.0f, 0, ForceMode.VelocityChange);
+        rb.AddForce(0, -10.0f, 0, ForceMode.VelocityChange);
 
         //rb.AddForce(0, -100.0f, 0, ForceMode.Acceleration);
     }
@@ -225,7 +221,7 @@ public class Player : MonoBehaviour
         materialBlock.SetColor("_Color", colourCurrent);
         renderer.SetPropertyBlock(materialBlock);
 
-        Jiggle();
+       // Jiggle();
     }
 
     protected void Jiggle()

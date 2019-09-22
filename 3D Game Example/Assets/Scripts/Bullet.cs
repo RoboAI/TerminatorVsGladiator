@@ -24,12 +24,7 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.name == "Player_1")
-        {
-            //Physics.IgnoreCollision(this.gameObject.GetComponent<Collider>(), collision.collider);
-        }
-        else
-            Destroy(this.gameObject);
+        Destroy(this.gameObject);
     }
 
     private void Seconds()
