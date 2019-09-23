@@ -11,6 +11,7 @@ public class PlayerHit : MonoBehaviour
     private MaterialPropertyBlock materialBlock;
     private Renderer objectRenderer;
     private PlayerData playerData;
+    private CameraFollow camera;
 
     Color colourOriginal;
     Color colourSeverlyDamaged;
@@ -22,6 +23,7 @@ public class PlayerHit : MonoBehaviour
         playerData = gameObject.GetComponent<PlayerData>();
         objectRenderer = GetComponent<Renderer>();
         rb = GetComponent<Rigidbody>();
+        camera = GameObject.Find("Main Camera").GetComponent<CameraFollow>();
 
         colourOriginal = objectRenderer.material.color;
         colourSeverlyDamaged = Color.red;
@@ -46,6 +48,7 @@ public class PlayerHit : MonoBehaviour
         objectRenderer.SetPropertyBlock(materialBlock);
 
         Jiggle();
+        Camera.main.GetComponent<CameraFollow>().PlayerHit();
     }
 
     protected void Jiggle()

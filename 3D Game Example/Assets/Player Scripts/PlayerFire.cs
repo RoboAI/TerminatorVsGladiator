@@ -10,7 +10,7 @@ public class PlayerFire : MonoBehaviour
     GameObject bulletOriginal;
     public float bulletSpeed = 1f;
     public float x_offset = 1;
-    public float y_vector = 4;
+    public float y_vector = 1;
 
 
     // Start is called before the first frame update
@@ -51,7 +51,7 @@ public class PlayerFire : MonoBehaviour
         instBullet.AddComponent<Bullet>();
         instBullet.GetComponent<Collider>().enabled = true;
         instBullet.GetComponent<ConstantForce>().force = Vector3.down * 10;
-        instBullet.transform.position = new Vector3(playerTransform.x + x_offset, playerTransform.y + 0.5f, playerTransform.z);
+        instBullet.transform.position = new Vector3(playerTransform.x + x_offset, playerTransform.y, playerTransform.z);
 
         instRB.AddForce(new Vector3(bulletSpeed, y_vector, 0), ForceMode.Impulse);
     }

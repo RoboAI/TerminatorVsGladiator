@@ -518,7 +518,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 373620702}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: fe60223d2f0c89145a7df2f170fd36d5, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
@@ -684,6 +684,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxLeft: -4
   maxRight: 4
+  shakeMagnitude: 0.25
+  shakeDurationDefault: 0.25
+  delayBetweenFrame: 0.01
 --- !u!1 &594934171
 GameObject:
   m_ObjectHideFlags: 0
@@ -965,7 +968,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 640010368}
-  m_Material: {fileID: 13400000, guid: 201ce4f8d87bac149a1c6231c7a47027, type: 2}
+  m_Material: {fileID: 13400000, guid: fe60223d2f0c89145a7df2f170fd36d5, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -2234,7 +2237,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1319950951}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: fe60223d2f0c89145a7df2f170fd36d5, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
@@ -2593,7 +2596,7 @@ GameObject:
   - component: {fileID: 1469875092}
   - component: {fileID: 1469875091}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: TimeDisplay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2835,7 +2838,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1510268797}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: fe60223d2f0c89145a7df2f170fd36d5, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
@@ -2943,7 +2946,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47ae5c87db82ffe458bb5d751c49e9bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  health: 1
   moveSpeed: 1
   healthBar: {fileID: 0}
 --- !u!114 &1517503898
@@ -3122,7 +3125,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1517503896}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.16, y: 3.2, z: -2}
+  m_LocalPosition: {x: -1.25, y: 1.38, z: -2}
   m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_Children:
   - {fileID: 1485583398}
@@ -3769,7 +3772,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1710667866}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: fe60223d2f0c89145a7df2f170fd36d5, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
@@ -4173,8 +4176,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e688b8b8823c9b945989c36d42a5ee71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerData: {fileID: 0}
   iAmBarOnLeft: 1
-  health: 100
   direction: {x: 0, y: 0, z: 0}
 --- !u!65 &1913979720
 BoxCollider:
@@ -4468,7 +4471,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1985215609}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: fe60223d2f0c89145a7df2f170fd36d5, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -4640,7 +4643,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47ae5c87db82ffe458bb5d751c49e9bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  health: 1
   moveSpeed: 1
   healthBar: {fileID: 0}
 --- !u!1 &2005783578
@@ -4998,8 +5001,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e688b8b8823c9b945989c36d42a5ee71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerData: {fileID: 0}
   iAmBarOnLeft: 0
-  health: 100
   direction: {x: 0, y: 0, z: 0}
 --- !u!1 &1936511107707567793
 GameObject:
