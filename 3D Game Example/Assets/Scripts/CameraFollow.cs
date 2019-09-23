@@ -38,8 +38,8 @@ public class CameraFollow : MonoBehaviour
 
     private void LateUpdate()
     {
-        //if(!CamShake)
-        //MoveToPlayer(player1);
+        MoveToPlayer(player1);
+
         if (CamShake && !cameraShaking)
         {
             cameraShaking = true;
@@ -56,11 +56,6 @@ public class CameraFollow : MonoBehaviour
     IEnumerator ShakeCamera()
     {
         Vector3 camInitial = transform.position;
-
-        //transform.position = camInitial + (Random.insideUnitSphere * shakeMagnitude);
-        //yield return new WaitForSeconds(1.0f);
-        //transform.position = camInitial;
-        //CamShake = false;
 
         ShakeDurationRemaining = shakeDurationDefault;
 
@@ -79,6 +74,7 @@ public class CameraFollow : MonoBehaviour
             }
             yield return null;
         }
+
         yield return null;
     }
 
