@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class PlayerInputs : MonoBehaviour
 {
-    private KeyCode KeyLeft = KeyCode.A;
-    private KeyCode KeyRight = KeyCode.D;
-    private KeyCode KeyJump = KeyCode.W;
-    private KeyCode KeyFire = KeyCode.Space;
+    public KeyCode KeyLeft;
+    public KeyCode KeyRight;
+    public KeyCode KeyJump;
+    public KeyCode KeyFire;
 
     public bool isJumpPressed = false;
     public bool isLeftPressed = false;
     public bool isRightPressed = false;
     public bool isFirePressed = false;
+
+    private void Awake()
+    {
+        KeyLeft = KeyCode.A;
+        KeyRight = KeyCode.D;
+        KeyJump = KeyCode.W;
+        KeyFire = KeyCode.Space;
+    }
 
     void Start()
     {
@@ -33,6 +41,7 @@ public class PlayerInputs : MonoBehaviour
 
     public void AssignKeys(KeyCode left, KeyCode right, KeyCode jump, KeyCode fire)
     {
+        Debug.Log("assign keys");
         KeyLeft = left;
         KeyRight = right;
         KeyJump = jump;

@@ -29,6 +29,9 @@ camera size 25
 camera LEFT -3.8, 24.1, 20
 camera RIGHT 3.75, 24.1, 20
 
+cube verts
+0, 2, 4, 6, 8, 10, 12, 13, 20, 21, 22, 23
+
 sheild 3d
 rotation 21.615, 93.877, 84.747
 position -25.89, 9.89, -9

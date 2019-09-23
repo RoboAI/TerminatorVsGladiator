@@ -33,7 +33,6 @@ public class PlayerInputMoves : MonoBehaviour
 
     private void DoLeft()
     {
-        
         cf.force = Vector3.left * moveSpeed;
         rb.AddForce(Vector3.left, ForceMode.Impulse);
     }

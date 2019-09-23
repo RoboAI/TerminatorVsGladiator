@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class Camera : MonoBehaviour
 {
-    Player player1;
-    Player player2;
+    GameObject player1;
+    GameObject player2;
 
-    float maxLeft = -1.95f;
-    float maxRight = 1.95f;
+    public float maxLeft = -4f;
+    public float maxRight = 4f;
 
     Vector3 positionVector = new Vector3();
 
     // Start is called before the first frame update
     void Start()
     {
-        player1 = GameObject.Find("Player_1").GetComponent<Player>();
-        player2 = GameObject.Find("Player_2").GetComponent<Player>();
+        player1 = GameObject.Find("PlayerMain1");
+        player2 = GameObject.Find("PlayerMain2");
 
         //positionVector = new Vector3(player1.transform.position.x, transform.position.y, transform.position.z);
         positionVector = transform.position;
@@ -25,15 +25,15 @@ public class Camera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        MoveToPlayer(player1);
+       
     }
 
     private void FixedUpdate()
     {
-        
+        MoveToPlayer(player1);
     }
 
-    void MoveToPlayer(Player player)
+    void MoveToPlayer(GameObject player)
     {
         positionVector.Set(player1.transform.position.x, transform.position.y, transform.position.z);
         transform.position = positionVector;

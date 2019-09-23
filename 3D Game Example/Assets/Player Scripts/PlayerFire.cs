@@ -10,7 +10,7 @@ public class PlayerFire : MonoBehaviour
     GameObject bulletOriginal;
     public float bulletSpeed = 1f;
     public float x_offset = 1;
-    public float y_vector = 5;
+    public float y_vector = 4;
 
 
     // Start is called before the first frame update
@@ -26,33 +26,33 @@ public class PlayerFire : MonoBehaviour
     {
         if (playerInputs.isFirePressed)
         {
-            Debug.Log("shooting");
-;            CreateAndShoot(bulletOriginal, gameObject);
+            CreateAndShoot(bulletOriginal, 9, gameObject);
         }
     }
 
     private void FixedUpdate()
     {
-        
+
     }
 
-    public void CreateAndShoot(GameObject bullet, GameObject playerRequestingShoot/*not used*/)
+    public void CreateAndShoot(GameObject bullet, int layer, GameObject playerRequestingShoot/*not used*/)
     {
+        Debug.Log("CreateAndShoot");
         Vector3 playerTransform = rb.transform.position;
 
         GameObject instBullet = Instantiate(bullet, transform.position, Quaternion.identity) as GameObject;
+        Rigidbody instRB = instBullet.GetComponent<Rigidbody>();
+
         instBullet.name = "Bullet";
-        instBullet.layer = 9;
-        //instBullet.tag = "BulletPlayer1";
+        instBullet.tag = "Bullet";
+        instBullet.layer = layer;
+        instRB.useGravity = true;
+
         instBullet.AddComponent<Bullet>();
         instBullet.GetComponent<Collider>().enabled = true;
-        instBullet.GetComponent<Rigidbody>().useGravity = true;
         instBullet.GetComponent<ConstantForce>().force = Vector3.down * 10;
         instBullet.transform.position = new Vector3(playerTransform.x + x_offset, playerTransform.y + 0.5f, playerTransform.z);
-        Rigidbody instBulletRigidBody = instBullet.GetComponent<Rigidbody>();
 
-        
-        instBulletRigidBody.AddForce(new Vector3(bulletSpeed, y_vector, 0), ForceMode.Impulse);
-        // instBulletRigidBody.AddForce(new Vector3(100, -500, 0), ForceMode.Acceleration);
+        instRB.AddForce(new Vector3(bulletSpeed, y_vector, 0), ForceMode.Impulse);
     }
 }

@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Blank : MonoBehaviour
+public class PlayerHealthBar : MonoBehaviour
 {
-    // Start is called before the first frame update
+    //HealthBar
+
+
     void Start()
     {
         
@@ -15,6 +17,4 @@ public class Blank : MonoBehaviour
     {
         
     }
-
-    //public void KeyDown()
 }

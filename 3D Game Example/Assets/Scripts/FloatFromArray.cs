@@ -5,7 +5,7 @@ using UnityEngine;
 public class FloatFromArray : MonoBehaviour
 {
     // Start is called before the first frame update
-    static public float[] CloudSpeeds = new float[] { 0.15f, 0.2f, 0.3f, 0.35f, 0.4f, 0.45f, 0.25f };
+    static public float[] CloudSpeeds = new float[] { 0.015f, 0.02f, 0.03f, 0.035f, 0.04f, 0.045f, 0.025f };
 
     void Start()
     {

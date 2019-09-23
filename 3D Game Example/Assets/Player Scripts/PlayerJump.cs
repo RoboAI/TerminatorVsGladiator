@@ -57,10 +57,15 @@ public class PlayerJump : MonoBehaviour
     {
         if (collision.gameObject.tag == "Platform")
         {
-            if (Input.GetKey(KeyCode.W))
+            if (Input.GetKey(playerInputs.KeyJump))
                 Jump();
             else
                 hasJumped = 0;
+        }
+
+        else if (collision.gameObject.tag == "Player")
+        {
+            hasJumped = 0;
         }
     }
 }

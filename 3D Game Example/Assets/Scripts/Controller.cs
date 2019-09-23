@@ -4,24 +4,39 @@ using UnityEngine;
 
 public class Controller : MonoBehaviour
 {
-    Player Player1;
-    Player Player2;
+    GameObject Player1;
+    GameObject Player2;
+    HealthBar Player1_HealthBar;
+    HealthBar Player2_HealthBar;
 
-    private bool isJumpPressed = false;
-    private bool isLeftPressed = false;
-    private bool isRightPressed = false;
-    private bool isFirePressed = false;
+    private void Awake()
+    {
 
-    float x = 0;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        Player1 = GameObject.Find("Player_1").GetComponent<Player>();
-        Player2 = GameObject.Find("Player_2").GetComponent<Player>();
+        Player1 = GameObject.Find("PlayerMain1");
+        Player2 = GameObject.Find("PlayerMain2");
 
-        Player1.AssignKeys(KeyCode.A, KeyCode.D, KeyCode.W, KeyCode.Space);
-        Player2.AssignKeys(KeyCode.LeftArrow, KeyCode.RightArrow, KeyCode.UpArrow, KeyCode.M);
+        Player1_HealthBar = GameObject.Find("Player1_Health").GetComponent<HealthBar>();
+        Player1_HealthBar.iAmBarOnLeft = true;
+        Player1_HealthBar.playerData = Player1.GetComponent<PlayerData>();
+
+
+       // Player1_HealthBar.health = Player1.GetComponent<PlayerData>().health;
+        Player1.GetComponent<PlayerInputs>().AssignKeys(KeyCode.A, KeyCode.D, KeyCode.W, KeyCode.Space);
+        Player1.GetComponent<PlayerInputMoves>().moveSpeed = Player1.GetComponent<PlayerData>().moveSpeed;
+        Player1.GetComponent<PlayerData>().healthBar = Player1_HealthBar;
+
+        Player2_HealthBar = GameObject.Find("Player2_Health").GetComponent<HealthBar>();
+        Player2_HealthBar.iAmBarOnLeft = false;
+        Player2_HealthBar.playerData = Player1.GetComponent<PlayerData>();
+        // Player2_HealthBar.health = Player1.GetComponent<PlayerData>().health;
+        Player2.GetComponent<PlayerInputs>().AssignKeys(KeyCode.LeftArrow, KeyCode.RightArrow, KeyCode.UpArrow, KeyCode.KeypadEnter);
+        Player2.GetComponent<PlayerInputMoves>().moveSpeed = Player2.GetComponent<PlayerData>().moveSpeed;
+        Player2.GetComponent<PlayerData>().healthBar = Player2_HealthBar;
 
         //GameObject.Find("Quad").GetComponent<Shield>().AssignPlayer(Player1);
     }
