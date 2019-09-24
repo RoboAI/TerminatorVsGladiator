@@ -37,7 +37,7 @@ public class PlayerFire : MonoBehaviour
 
     public void CreateAndShoot(GameObject bullet, int layer, GameObject playerRequestingShoot/*not used*/)
     {
-        Debug.Log("CreateAndShoot");
+        //Debug.Log("CreateAndShoot");
         Vector3 playerTransform = rb.transform.position;
 
         GameObject instBullet = Instantiate(bullet, transform.position, Quaternion.identity) as GameObject;

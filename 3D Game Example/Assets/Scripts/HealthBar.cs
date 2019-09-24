@@ -29,15 +29,10 @@ public class HealthBar : MonoBehaviour
         mesh = GetComponent<MeshFilter>().mesh;
         vertices = mesh.vertices;
 
-        CreateNewVerticesCopy(vertices, originalVertices);
+        originalVertices = CreateNewVerticesCopy(vertices);
 
         barLength = Mathf.Abs(vertices[0].x - vertices[9].x) * transform.localScale.x;
         healthBarRatio = barLength / 100;
-    }
-
-    private void Update()
-    {
-        
     }
 
     private void FixedUpdate()
@@ -45,7 +40,6 @@ public class HealthBar : MonoBehaviour
         if (takeDamage)
         {
             takeDamage = false;
-            
             damageAmount = 0;
 
             vertices[0] += direction;
@@ -68,7 +62,7 @@ public class HealthBar : MonoBehaviour
 
     public void TakeDamage(float amount)
     {
-        Debug.Log(playerData.health);
+        //Debug.Log("Take damage");
 
         damageAmount = amount;
         takeDamage = true;
@@ -77,7 +71,8 @@ public class HealthBar : MonoBehaviour
 
         if (playerData.health <= 0)
         {
-            Debug.Log("health == 0");
+            //Debug.Log("health <= 0");
+
             ResetBar();
             playerData.health = 1.0f;
             return;
@@ -86,23 +81,29 @@ public class HealthBar : MonoBehaviour
 
     public void ResetBar()
     {
+        //Debug.Log("ResetBar");
+
         CopyVertices(originalVertices, vertices);
         mesh.vertices = originalVertices;
         mesh.RecalculateBounds();
     }
 
-    public void CreateNewVerticesCopy(Vector3[] src, Vector3[] dst)
+    public Vector3[] CreateNewVerticesCopy(Vector3[] src)
     {
-        dst = new Vector3[src.Length];
+        //Debug.Log("CreateNewVerticesCopy");
+
+        Vector3[] dst = new Vector3[src.Length];
         for (int i = 0; i < src.Length; i++)
         {
             dst[i] = new Vector3(src[i].x, src[i].y, src[i].z);
         }
+        return dst;
     }
 
     public void CopyVertices(Vector3[] src, Vector3[] dst)
     {
-        //dst = new Vector3[src.Length];
+        //Debug.Log("CopyVertices");
+        
         for (int i = 0; i < src.Length; i++)
         {
             dst[i].Set(src[i].x, src[i].y, src[i].z);
