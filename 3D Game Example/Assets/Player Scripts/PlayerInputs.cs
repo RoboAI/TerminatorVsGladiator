@@ -33,7 +33,7 @@ public class PlayerInputs : MonoBehaviour
 
     private void GetRealInputs()
     {
-        isJumpPressed = Input.GetKeyDown(KeyJump);
+        isJumpPressed = Input.GetKey(KeyJump);
         isLeftPressed = Input.GetKey(KeyLeft);
         isRightPressed = Input.GetKey(KeyRight);
         isFirePressed = Input.GetKeyDown(KeyFire);
@@ -41,7 +41,7 @@ public class PlayerInputs : MonoBehaviour
 
     public void AssignKeys(KeyCode left, KeyCode right, KeyCode jump, KeyCode fire)
     {
-        Debug.Log("assign keys");
+        //Debug.Log("assign keys");
         KeyLeft = left;
         KeyRight = right;
         KeyJump = jump;

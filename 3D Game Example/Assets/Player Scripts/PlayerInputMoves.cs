@@ -9,6 +9,7 @@ public class PlayerInputMoves : MonoBehaviour
     public Rigidbody rb;
     private PlayerInputs playerInputs;
     private ConstantForce cf;
+    private PlayerJump playerJump;
 
 
     void Start()
@@ -16,19 +17,23 @@ public class PlayerInputMoves : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         playerInputs = GetComponent<PlayerInputs>();
         cf = GetComponent<ConstantForce>();
+        playerJump = GetComponent<PlayerJump>();
     }
 
     void Update()
     {
-        if (playerInputs.isLeftPressed)
-            DoLeft();
-        else if (playerInputs.isRightPressed)
-            DoRight();
+
     }
 
     private void FixedUpdate()
     {
-        
+        //Debug.Log("2nd: " + Time.time);
+        if (playerInputs.isLeftPressed)
+            DoLeft();
+        if (playerInputs.isRightPressed)
+            DoRight();
+        if (playerInputs.isJumpPressed)
+            DoJump();
     }
 
     private void DoLeft()
@@ -41,6 +46,11 @@ public class PlayerInputMoves : MonoBehaviour
     {
         cf.force = Vector3.right * moveSpeed;
         rb.AddForce(Vector3.right, ForceMode.Impulse);
+    }
+
+    private void DoJump()
+    {
+        playerJump.TryJump();
     }
 
     private void OnCollisionEnter(Collision collision)

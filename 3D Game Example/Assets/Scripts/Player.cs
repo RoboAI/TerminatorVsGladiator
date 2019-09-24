@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
     private int hasJumped = 0;
 
     private MaterialPropertyBlock materialBlock;
-    private Renderer renderer;
+    private Renderer rend;
     Color colourOriginal;
     Color colourSeverlyDamaged;
     Color colourCurrent;
@@ -34,9 +34,9 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        renderer = GetComponent<Renderer>();
+        rend = GetComponent<Renderer>();
 
-        colourOriginal = renderer.material.color;
+        colourOriginal = rend.material.color;
         colourSeverlyDamaged = Color.red;
         
         rb = GetComponent<Rigidbody>();
@@ -47,8 +47,6 @@ public class Player : MonoBehaviour
 
         bulletController = GameObject.Find("BulletShooter").GetComponent<BulletController>();
         bulletController.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y, this.gameObject.transform.position.z);
-
-        //FallFaster();
     }
 
     void Update()
@@ -219,7 +217,7 @@ public class Player : MonoBehaviour
 
         colourCurrent = Color.Lerp(colourSeverlyDamaged, colourOriginal, health);
         materialBlock.SetColor("_Color", colourCurrent);
-        renderer.SetPropertyBlock(materialBlock);
+        rend.SetPropertyBlock(materialBlock);
 
        // Jiggle();
     }

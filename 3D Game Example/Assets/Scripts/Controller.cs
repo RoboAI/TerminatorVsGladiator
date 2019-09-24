@@ -24,16 +24,14 @@ public class Controller : MonoBehaviour
         Player1_HealthBar.iAmBarOnLeft = true;
         Player1_HealthBar.playerData = Player1.GetComponent<PlayerData>();
 
-
-       // Player1_HealthBar.health = Player1.GetComponent<PlayerData>().health;
         Player1.GetComponent<PlayerInputs>().AssignKeys(KeyCode.A, KeyCode.D, KeyCode.W, KeyCode.Space);
         Player1.GetComponent<PlayerInputMoves>().moveSpeed = Player1.GetComponent<PlayerData>().moveSpeed;
         Player1.GetComponent<PlayerData>().healthBar = Player1_HealthBar;
 
         Player2_HealthBar = GameObject.Find("Player2_Health").GetComponent<HealthBar>();
         Player2_HealthBar.iAmBarOnLeft = false;
-        Player2_HealthBar.playerData = Player1.GetComponent<PlayerData>();
-        // Player2_HealthBar.health = Player1.GetComponent<PlayerData>().health;
+        Player2_HealthBar.playerData = Player2.GetComponent<PlayerData>();
+
         Player2.GetComponent<PlayerInputs>().AssignKeys(KeyCode.LeftArrow, KeyCode.RightArrow, KeyCode.UpArrow, KeyCode.KeypadEnter);
         Player2.GetComponent<PlayerInputMoves>().moveSpeed = Player2.GetComponent<PlayerData>().moveSpeed;
         Player2.GetComponent<PlayerData>().healthBar = Player2_HealthBar;

@@ -19,15 +19,6 @@ public class PlayerJump : MonoBehaviour
         playerInputs = GetComponent<PlayerInputs>();
     }
 
-    void Update()
-    {
-        if (playerInputs.isJumpPressed && hasJumped < maxJumpCount)
-        {
-            Jump();
-            hasJumped++;
-        }
-    }
-
     private void OnGUI()
     {
         //GUILayout.Label(hasJumped.ToString());
@@ -35,17 +26,22 @@ public class PlayerJump : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //if(hasJumped > 0)
-        {
-            ApplyExtraForce();
-        }
+        TryJump();
+        ApplyExtraForce();
     }
 
-    private void Jump()
+    public void TryJump()
     {
-        Debug.Log("PlayerJump JUMPPPPPPP");
+        if (playerInputs.isJumpPressed && hasJumped < maxJumpCount)
+            Jump();
+    }
+
+    public void Jump()
+    {
+        //Debug.Log("PlayerJump JUMPPPPPPP");
         rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
         rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
+        hasJumped++;
     }
 
     public void ApplyExtraForce()
@@ -57,7 +53,7 @@ public class PlayerJump : MonoBehaviour
     {
         if (collision.gameObject.tag == "Platform")
         {
-            if (Input.GetKey(playerInputs.KeyJump))
+            if (playerInputs.isJumpPressed)
                 Jump();
             else
                 hasJumped = 0;

@@ -29,21 +29,15 @@ public class HealthBar : MonoBehaviour
         mesh = GetComponent<MeshFilter>().mesh;
         vertices = mesh.vertices;
 
-        copyVertices(vertices, originalVertices);
+        CreateNewVerticesCopy(vertices, originalVertices);
 
         barLength = Mathf.Abs(vertices[0].x - vertices[9].x) * transform.localScale.x;
         healthBarRatio = barLength / 100;
     }
 
-    // Start is called before the first frame update
-    void Start()
+    private void Update()
     {
-    }
-
-
-    // Update is called once per frame
-    void Update()
-    {
+        
     }
 
     private void FixedUpdate()
@@ -75,32 +69,43 @@ public class HealthBar : MonoBehaviour
     public void TakeDamage(float amount)
     {
         Debug.Log(playerData.health);
-        if(playerData.health <= 0)
+
+        damageAmount = amount;
+        takeDamage = true;
+
+        direction = Vector3.left * damageAmount;
+
+        if (playerData.health <= 0)
         {
             Debug.Log("health == 0");
             ResetBar();
             playerData.health = 1.0f;
             return;
         }
-        damageAmount = amount;
-        takeDamage = true;
-
-        direction = Vector3.left * damageAmount;
     }
 
     public void ResetBar()
     {
-        copyVertices(originalVertices, vertices);
+        CopyVertices(originalVertices, vertices);
         mesh.vertices = originalVertices;
         mesh.RecalculateBounds();
     }
 
-    public void copyVertices(Vector3[] src, Vector3[] dst)
+    public void CreateNewVerticesCopy(Vector3[] src, Vector3[] dst)
     {
         dst = new Vector3[src.Length];
         for (int i = 0; i < src.Length; i++)
         {
             dst[i] = new Vector3(src[i].x, src[i].y, src[i].z);
+        }
+    }
+
+    public void CopyVertices(Vector3[] src, Vector3[] dst)
+    {
+        //dst = new Vector3[src.Length];
+        for (int i = 0; i < src.Length; i++)
+        {
+            dst[i].Set(src[i].x, src[i].y, src[i].z);
         }
     }
 }
