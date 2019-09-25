@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Controller : MonoBehaviour
 {
@@ -8,6 +9,10 @@ public class Controller : MonoBehaviour
     GameObject Player2;
     HealthBar Player1_HealthBar;
     HealthBar Player2_HealthBar;
+
+    GameRoundTimer gameRoundTimer;
+
+    public int roundTimeInMillis = 90;
 
     private void Awake()
     {
@@ -36,13 +41,25 @@ public class Controller : MonoBehaviour
         Player2.GetComponent<PlayerInputMoves>().moveSpeed = Player2.GetComponent<PlayerData>().moveSpeed;
         Player2.GetComponent<PlayerData>().healthBar = Player2_HealthBar;
 
+        gameRoundTimer = GameObject.Find("TimeDisplay").GetComponent<GameRoundTimer>();
+        gameRoundTimer.StartRound(10, RoundFinished);
+
         //GameObject.Find("Quad").GetComponent<Shield>().AssignPlayer(Player1);
+
+    }
+
+    public void RoundFinished()
+    {
+        Debug.Log("round finished");
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("main_menu");
+        }
 
         // Player2.transform.position += new Vector3(0.1f, 0, 0);
         //Player2.transform.position += new Vector3(0.01f, 0, 0);
