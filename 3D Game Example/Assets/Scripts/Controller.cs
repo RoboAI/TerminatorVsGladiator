@@ -12,7 +12,7 @@ public class Controller : MonoBehaviour
 
     GameRoundTimer gameRoundTimer;
 
-    public int roundTimeInMillis = 90;
+    public int roundTimeInSeconds = 20;
 
     private void Awake()
     {
@@ -42,7 +42,7 @@ public class Controller : MonoBehaviour
         Player2.GetComponent<PlayerData>().healthBar = Player2_HealthBar;
 
         gameRoundTimer = GameObject.Find("TimeDisplay").GetComponent<GameRoundTimer>();
-        gameRoundTimer.StartRound(10, RoundFinished);
+        gameRoundTimer.StartRound(roundTimeInSeconds, RoundFinished);
 
         //GameObject.Find("Quad").GetComponent<Shield>().AssignPlayer(Player1);
 

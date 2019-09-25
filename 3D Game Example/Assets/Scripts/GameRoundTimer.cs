@@ -18,7 +18,7 @@ public class GameRoundTimer : MonoBehaviour
 
     private void Awake()
     {
-        roundTime = GameObject.Find("Controller").GetComponent<Controller>().roundTimeInMillis;
+        //roundTime = GameObject.Find("Controller").GetComponent<Controller>().roundTimeInSeconds;
 
         countdownTimer = GetComponent<MyCountdownTimer>();
         continuousTimer = GetComponent<MyContinuousTimer>();

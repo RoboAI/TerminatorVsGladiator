@@ -12,7 +12,7 @@ public class RoundTime : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        roundTime = GameObject.Find("Controller").GetComponent<Controller>().roundTimeInMillis;
+        roundTime = GameObject.Find("Controller").GetComponent<Controller>().roundTimeInSeconds;
     }
 
     // Update is called once per frame

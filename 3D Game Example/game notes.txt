@@ -67,3 +67,10 @@ void onPacketReceived(){
 }
 --------------------------------------------------
 
+
+--player facing player
+--game over screen
+--red player tail
+--file loading
+--how timer class works
+--sort out layers, e.g. CreateAndShoot has hardcoded '9'
