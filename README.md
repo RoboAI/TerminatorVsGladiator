@@ -5,3 +5,15 @@ A 2 player shooting game made with Unity
 
 
 <img src="https://8ztuea.am.files.1drv.com/y4mvpBwRRcknq3txdpLHt3o3lWdXGwyHUajGW042COHUk9qdOAeoBD3nBIxBliDp3c2ovGLABES2eES0wipDXDKtptx4Z71-LcechzrX-cXuvPWuNX8dRhjhCOb5vJjd_xeqB2Q35NIhfdUKhGW04EOcldlVEwGwf4dwjXa5HIjSLUprxx4C7E6tb18owa59aHUCKbXA_umLhx3t0QoHEndXg?width=637&height=399&cropmode=none" width="500">
+
+
+
+Images / Media used from :
+
+https://www.freepik.com/free-vector/
+
+https://flamingtext.com
+
+https://pixabay.com/
+
+http://clipart-library.com/
