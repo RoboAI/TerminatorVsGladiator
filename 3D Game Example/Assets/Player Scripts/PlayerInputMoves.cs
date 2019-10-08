@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class PlayerInputMoves : MonoBehaviour
 {
-    public float moveSpeed = 1.0f;
-
     public Rigidbody rb;
     private PlayerInputs playerInputs;
     private ConstantForce cf;
     private PlayerJump playerJump;
-
+    private PlayerData playerData;
 
     void Start()
     {
@@ -18,6 +16,7 @@ public class PlayerInputMoves : MonoBehaviour
         playerInputs = GetComponent<PlayerInputs>();
         cf = GetComponent<ConstantForce>();
         playerJump = GetComponent<PlayerJump>();
+        playerData = GetComponent<PlayerData>();
     }
 
     void Update()
@@ -38,13 +37,13 @@ public class PlayerInputMoves : MonoBehaviour
 
     private void DoLeft()
     {
-        cf.force = Vector3.left * moveSpeed;
+        cf.force = Vector3.left * playerData.moveSpeed;
         rb.AddForce(Vector3.left, ForceMode.Impulse);
     }
 
     private void DoRight()
     {
-        cf.force = Vector3.right * moveSpeed;
+        cf.force = Vector3.right * playerData.moveSpeed;
         rb.AddForce(Vector3.right, ForceMode.Impulse);
     }
 

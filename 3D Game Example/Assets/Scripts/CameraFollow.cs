@@ -29,7 +29,13 @@ public class CameraFollow : MonoBehaviour
 
     void MoveToPlayer(GameObject player)
     {
-        positionVector.Set(player1.transform.position.x, transform.position.y, transform.position.z);
+        Vector3 player1Vec = player1.transform.position;
+        Vector3 player2Vec = player2.transform.position;
+        Vector3 middleVec = new Vector3(player1Vec.x + ((player2Vec.x - player1Vec.x) / 2), 4, transform.position.z);
+        //float dist = ((player2Vec.x - player1Vec.x) / 2);
+        
+        positionVector.Set(middleVec.x, middleVec.y, middleVec.z);
+        //positionVector.Set(player1.transform.position.x, transform.position.y, transform.position.z);
         transform.position = positionVector;
 
         if(transform.position.x <= maxLeft)

@@ -14,14 +14,14 @@ public class MyCountdownTimer : MonoBehaviour
     //start timer for seconds with default parameters
     public void StartTimer(float delayInSeconds, TimerElapsedCallback t, TimerFinished tf)
     {
-        Debug.Log("StartCountdown");
+        Debug.Log("StartTimer");
         coroutine = StartCoroutine(StartCountdownCoroutine(delayInSeconds, delayInSeconds, delayInSeconds, t, tf));
     }
 
     //start timer with full customisable
     public void StartTimer(float startValue, float waitForDelay, float countDownBy, TimerElapsedCallback t, TimerFinished tf)
     {
-        Debug.Log("StartCountdown2");
+        Debug.Log("StartTimer2");
         coroutine = StartCoroutine(StartCountdownCoroutine(startValue, waitForDelay, countDownBy, t, tf));
     }
 
@@ -37,7 +37,7 @@ public class MyCountdownTimer : MonoBehaviour
     //the coroutine thats actually run
     private IEnumerator StartCountdownCoroutine(float startValue, float waitForDelay, float countDownBy, TimerElapsedCallback t, TimerFinished tf)
     {
-        Debug.Log("StartCountdown");
+        Debug.Log("StartCountdownCoroutine");
 
         //stopwatch to track time elapsed
         System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();

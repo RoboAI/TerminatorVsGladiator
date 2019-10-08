@@ -7,13 +7,13 @@ public class HealthBar : MonoBehaviour
     private float barLength = 0;
     private float healthBarRatio;
 
-    Rigidbody rd;
+    Rigidbody rb;
     Renderer objectRenderer;
     public PlayerData playerData;//set by controller
 
     Mesh mesh;
     Vector3[] vertices;
-    Vector3[] originalVertices;
+    Vector3[] originalVertices;//used to restore health bar on new game
 
     public bool iAmBarOnLeft = true;//set by Controller
     public Vector3 direction;
@@ -24,7 +24,7 @@ public class HealthBar : MonoBehaviour
     private void Awake()
     {
         objectRenderer = GetComponent<Renderer>();
-        playerData = GetComponent<PlayerData>();
+        //playerData = set by controller
 
         mesh = GetComponent<MeshFilter>().mesh;
         vertices = mesh.vertices;
@@ -69,14 +69,14 @@ public class HealthBar : MonoBehaviour
 
         direction = Vector3.left * damageAmount;
 
-        if (playerData.health <= 0)
-        {
-            //Debug.Log("health <= 0");
+        // if (playerData.health <= 0)
+        // {
+        //     Debug.Log("health <= 0");
 
-            ResetBar();
-            playerData.health = 1.0f;
-            return;
-        }
+        //     ResetBar();
+        //     playerData.health = 1.0f;
+        //     return;
+        // }
     }
 
     public void ResetBar()

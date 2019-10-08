@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class PlayerInputs : MonoBehaviour
 {
+    //inputs can be customised for each player by assinging to these. Use AssignKeys();
     public KeyCode KeyLeft;
     public KeyCode KeyRight;
     public KeyCode KeyJump;
     public KeyCode KeyFire;
 
+    //bools to keep track of key-presses
     public bool isJumpPressed = false;
     public bool isLeftPressed = false;
     public bool isRightPressed = false;
     public bool isFirePressed = false;
+
+    Controller controller;
 
     private void Awake()
     {
@@ -20,6 +24,8 @@ public class PlayerInputs : MonoBehaviour
         KeyRight = KeyCode.D;
         KeyJump = KeyCode.W;
         KeyFire = KeyCode.Space;
+        
+        controller = GameObject.Find("Controller").GetComponent<Controller>();
     }
 
     void Start()
@@ -28,7 +34,14 @@ public class PlayerInputs : MonoBehaviour
 
     void Update()
     {
-        GetRealInputs();
+        if(!controller.isGameEnded && !controller.isGamePaused)
+            GetRealInputs();
+        else{
+            isJumpPressed = false;
+            isLeftPressed = false;
+            isRightPressed = false;
+            isFirePressed = false;
+        }
     }
 
     private void GetRealInputs()

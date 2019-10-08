@@ -15,5 +15,6 @@ public class ButtonHandler : MonoBehaviour
     public void Exit()
     {
         Debug.Log("exit");
+        Application.Quit();
     }
 }

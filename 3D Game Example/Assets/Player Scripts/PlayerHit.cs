@@ -14,10 +14,11 @@ public class PlayerHit : MonoBehaviour
     private PlayerData playerData;
     private CameraShake cameraShake;
 
+    private Controller controller;
+
     Color colourOriginal;//start colour of object
     Color colourSeverlyDamaged;//colour to fade towards
     Color colourCurrent;//actual variable that holds the current colour. This is the variable that is modified
-
 
     void Start()
     {
@@ -26,6 +27,7 @@ public class PlayerHit : MonoBehaviour
         objectRenderer = GetComponent<Renderer>();
         rb = GetComponent<Rigidbody>();
         cameraShake = GameObject.Find("Main Camera").GetComponent<CameraShake>();
+        controller = GameObject.Find("Controller").GetComponent<Controller>();
 
         //store original colour to be used when game is reset
         colourOriginal = objectRenderer.material.color;
@@ -49,13 +51,18 @@ public class PlayerHit : MonoBehaviour
             playerData.healthBar.TakeDamage(Bullet.damageAmount);
 
             //do stuff for this player
-            ImHit(collision);
+            DoImHitVisuals(collision);
+
+            //notify if player is dead
+            if(playerData.health <= 0){
+                controller.IamDead(gameObject);
+            }
         }
     }
-    protected void ImHit(Collision collision)
+    protected void DoImHitVisuals(Collision collision)
     {
         //change colour according to health level
-        colourCurrent = Color.Lerp(colourSeverlyDamaged, colourOriginal, (playerData.health / 100));
+        colourCurrent = Color.Lerp(colourSeverlyDamaged, colourOriginal, playerData.health);
         materialBlock.SetColor("_Color", colourCurrent);
         objectRenderer.SetPropertyBlock(materialBlock);
 

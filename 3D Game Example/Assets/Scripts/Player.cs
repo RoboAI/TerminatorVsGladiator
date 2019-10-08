@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
 
     GameObject thisObject;
     Player thisPlayer;
-    BulletController bulletController;
+    //BulletController bulletController;
 
     private float time = 0.0f;
 
@@ -45,8 +45,8 @@ public class Player : MonoBehaviour
 
         materialBlock = new MaterialPropertyBlock();
 
-        bulletController = GameObject.Find("BulletShooter").GetComponent<BulletController>();
-        bulletController.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y, this.gameObject.transform.position.z);
+       // bulletController = GameObject.Find("BulletShooter").GetComponent<BulletController>();
+        //bulletController.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y, this.gameObject.transform.position.z);
     }
 
     void Update()
@@ -56,7 +56,7 @@ public class Player : MonoBehaviour
         //isRightPressed = Input.GetKey(KeyCode.D);
 
 
-        bulletController.transform.position = thisPlayer.transform.position;
+       // bulletController.transform.position = thisPlayer.transform.position;
 
         DoKeyEvents();
 

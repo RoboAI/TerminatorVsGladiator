@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerHealthBar : MonoBehaviour
+public class NewBehaviourScript : MonoBehaviour
 {
-    //HealthBar
-
-
+    // Start is called before the first frame update
     void Start()
     {
         

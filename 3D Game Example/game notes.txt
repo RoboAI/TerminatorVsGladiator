@@ -74,3 +74,102 @@ void onPacketReceived(){
 --file loading
 --how timer class works
 --sort out layers, e.g. CreateAndShoot has hardcoded '9'
+--this shouldnt be in controller Player1_HealthBar.playerData = Player1.GetComponent<PlayerData>();
+--FIXED: seconds display cant display 3 digits properly
+--if velocity.x is less then (e.g.) 0.02, then x.velocity = 0
+--bug: when right player presses up&left together, player1 cant shoot.
+--when collision==vector.up, then jumped--;
+--player health should be int. as a result, healthbar needs a new formula
+--set playerWon = null;
+
+
+presentation notes
+ - show this code
+
+    private void FixedUpdate()
+    {
+        if (playerInputs.isLeftPressed)
+            DoLeft();
+        if (playerInputs.isRightPressed)
+            DoRight();
+        if (playerInputs.isJumpPressed)
+            DoJump();
+    }
+
+    private void DoLeft()
+    {
+        cf.force = Vector3.left * moveSpeed;
+        rb.AddForce(Vector3.left, ForceMode.Impulse);
+    }
+
+    private void DoRight()
+    {
+        cf.force = Vector3.right * moveSpeed;
+        rb.AddForce(Vector3.right, ForceMode.Impulse);
+    }
+
+    private void DoJump()
+    {
+        playerJump.TryJump();
+    }
+    -------------------------------------------------------------------------
+
+     void Update()
+    {
+        GetRealInputs();
+    }
+
+    private void GetRealInputs()
+    {
+        isJumpPressed = Input.GetKey(KeyJump);
+        isLeftPressed = Input.GetKey(KeyLeft);
+        isRightPressed = Input.GetKey(KeyRight);
+        isFirePressed = Input.GetKeyDown(KeyFire);
+    }
+
+    public void AssignKeys(KeyCode left, KeyCode right, KeyCode jump, KeyCode fire)
+    {
+        //Debug.Log("assign keys");
+        KeyLeft = left;
+        KeyRight = right;
+        KeyJump = jump;
+        KeyFire = fire;
+    }
+
+    public void KeyLeftDown()
+    {
+        isLeftPressed = true;
+    }
+
+    public void KeyRightDown()
+    {
+        isRightPressed = true;
+    }
+
+    public void KeyJumpDown()
+    {
+        isJumpPressed = true;
+    }
+
+    public void KeyFireDown()
+    {
+        isFirePressed = true;
+    }
+
+    public void KeyLeftUp()
+    {
+        isLeftPressed = false;
+    }
+
+    public void KeyRightUp()
+    {
+        isRightPressed = false;
+    }
+
+    public void KeyJumpUp()
+    {
+        isJumpPressed = false;
+    }
+
+    public void KeyFireUp(){...}
+    -------------------------------------------------------------------------
