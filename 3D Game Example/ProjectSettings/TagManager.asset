@@ -7,6 +7,7 @@ TagManager:
   - Platform
   - BulletPlayer1
   - Bullet
+  - Ground
   layers:
   - Default
   - TransparentFX
@@ -19,9 +20,9 @@ TagManager:
   - PostProcessing
   - Player1
   - Player2
-  - 
-  - 
-  - 
+  - Bullet
+  - Platform
+  - Ground
   - 
   - 
   - 

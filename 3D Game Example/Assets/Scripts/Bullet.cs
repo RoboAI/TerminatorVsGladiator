@@ -8,6 +8,15 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Destroy(this.gameObject);
+        if (collision.gameObject.tag == "Bullet")
+            return;
+        if (collision.gameObject.tag == "Platform")
+            return;
+
+        if (collision.gameObject.tag != "Bullet") 
+        {
+            Debug.Log("Bullet collision");
+            Destroy(this.gameObject);
+        }
     }
 }

@@ -7,7 +7,7 @@ public class CameraFollow : MonoBehaviour
     GameObject player1;
     GameObject player2;
 
-    public float maxLeft = -4f;
+    public float maxLeft = -1.4f;
     public float maxRight = 4f;
 
     Vector3 positionVector = new Vector3();

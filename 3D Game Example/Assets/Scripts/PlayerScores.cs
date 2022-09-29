@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class PlayerScores : IComparable
 {
+    public const int MAX_SCORES = 3;
+    public const int MIN_SCORES = 3;
+
     private int[] scores;
     public string Name { get; set; }
 
@@ -17,14 +20,16 @@ public class PlayerScores : IComparable
         set
         {
             scores = value;
-            Array.Sort(scores);
-            Array.Reverse(scores);
         }
     }
 
     public override string ToString(){
         string scoreFullString = "";
-        for(int j=0; j < Scores.Length; j++){
+
+        //we only want to show a maximum (MAX_SCORES) number of scores
+        int max_scores_count = (Scores.Length > MAX_SCORES) ? MAX_SCORES : Scores.Length;
+
+        for(int j=0; j < max_scores_count; j++){
             scoreFullString += String.Format("{0,-8}", Scores[j]);
         }
         return scoreFullString;
@@ -84,14 +89,19 @@ public class PlayerScores : IComparable
             playerScores.Add(outParse);
         });
 
-        //we want minimum of 3, so add if necessary
-        if(playerScores.Count < 3){
-            for(int i = 0; i < 3 - playerScores.Count; i++){
+        //we want minimum of MIN_SCORES, so add if necessary
+        if(playerScores.Count < MIN_SCORES){
+            int min_scores_count = MIN_SCORES - playerScores.Count;
+            for(int i = 0; i < min_scores_count; i++){
                 playerScores.Add(0);
             }
         }
 
         //store the array in the class
         Scores = playerScores.ToArray();
+        Array.Sort(Scores);
+        Array.Reverse(Scores);
+
+        //sort the array high to low
     }
 }
