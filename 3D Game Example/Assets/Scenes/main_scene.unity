@@ -393,7 +393,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 1e-45, y: 3e-45, z: 1, w: 1}
+  m_BoundingSphereOverride: {x: 4e-45, y: 6e-45, z: 1, w: 1}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -2464,8 +2464,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1138390198}
   m_LocalRotation: {x: 0.5000002, y: 0.49999982, z: 0.49999982, w: -0.5000002}
-  m_LocalPosition: {x: -9.5, y: 1.7541, z: -1.4064}
-  m_LocalScale: {x: 0.6883137, y: 0.2751377, z: 1.1818494}
+  m_LocalPosition: {x: -9.5, y: 1.7541, z: -2.4092}
+  m_LocalScale: {x: 0.8888403, y: 0.2751377, z: 1.1818494}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2135849235}
@@ -3100,7 +3100,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: NaN, y: NaN, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 4.32e-43, y: 1.0755953e-24, z: 4.3e-43, w: 4.0834e-41}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -3735,8 +3735,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1378254455}
   m_LocalRotation: {x: 0.5000004, y: -0.49999976, z: -0.4999995, w: -0.5000003}
-  m_LocalPosition: {x: 12, y: 1.7516, z: -1.3657}
-  m_LocalScale: {x: 0.6826304, y: 0.27513757, z: 1.1811919}
+  m_LocalPosition: {x: 12, y: 1.7516, z: -2.3903}
+  m_LocalScale: {x: 0.8875561, y: 0.27513757, z: 1.1811919}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1260130495}
@@ -4468,6 +4468,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
+  controller: {fileID: 0}
   bulletSpeed: 3
   x_offset: 1
   y_vector: 2.5
@@ -4966,8 +4967,6 @@ MonoBehaviour:
   gameOver: {fileID: 0}
   gameTimesUp: {fileID: 0}
   gamePaused: {fileID: 0}
-  isGamePaused: 0
-  isGameEnded: 0
   roundTimeInSeconds: 45
 --- !u!135 &1614016438
 SphereCollider:
@@ -5551,14 +5550,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1738564253}
-  m_LocalRotation: {x: -1, y: -0, z: -0, w: 0.00000058114523}
-  m_LocalPosition: {x: 1.27, y: 7.67, z: 0.33}
+  m_LocalRotation: {x: -0, y: 0, z: -1, w: 0}
+  m_LocalPosition: {x: 1.2700007, y: 7.67, z: 0.3299997}
   m_LocalScale: {x: 2.1935, y: 1, z: 0.33106}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1776513610}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: -180, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -180, y: -180, z: 0}
 --- !u!64 &1738564255
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -5593,7 +5592,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0447065e4eeaad349ad28ec7a4b22af0, type: 2}
+  - {fileID: 2100000, guid: fcfb437d85d6ecb418b33a84b6646ed9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6251,6 +6250,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
+  controller: {fileID: 0}
   bulletSpeed: 3
   x_offset: 1
   y_vector: 2.5
@@ -7038,8 +7038,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 2.7073573e+23, y: 1.775259e+28, z: 1.2053124e+13,
-    w: 7.9316175e+34}
+  m_BoundingSphereOverride: {x: 4.32e-43, y: 2.2237263, z: 4.32e-43, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0

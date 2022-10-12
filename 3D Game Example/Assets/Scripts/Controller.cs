@@ -22,8 +22,8 @@ public class Controller : MonoBehaviour
     public GameEndedImage gameTimesUp;
     public GameEndedImage gamePaused;
 
-    public bool isGamePaused = true;
-    public bool isGameEnded = false;
+    public bool isGamePaused { get; set; } = true;
+    public bool isGameEnded { get; set; } = false;
 
     public int roundTimeInSeconds = 45;
 
@@ -81,7 +81,7 @@ public class Controller : MonoBehaviour
 
     public void BeginRoundCountDown()
     {
-        countdownImages.StartCountdown(3 ,RoundStartCountDownFinished);
+        countdownImages.StartCountdown(3, RoundStartCountDownFinished);
     }
     
     public void RoundStartCountDownFinished()

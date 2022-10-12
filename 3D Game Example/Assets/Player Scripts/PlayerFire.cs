@@ -6,6 +6,7 @@ using TMPro;
 public class PlayerFire : MonoBehaviour
 {
     public Rigidbody rb;
+    public Controller controller;
     private PlayerInputs playerInputs;
 
     GameObject bulletOriginal;
@@ -18,6 +19,7 @@ public class PlayerFire : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        controller = GameObject.Find("Controller").GetComponent<Controller>();
         rb = GetComponent<Rigidbody>();
         playerInputs = GetComponent<PlayerInputs>();
         bulletOriginal = GameObject.Find("BulletMain");
@@ -26,10 +28,16 @@ public class PlayerFire : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playerInputs.isFirePressed)
+        if ((controller.isGamePaused == false) && (controller.isGameEnded == false))
         {
-            //instantiate bullet and set velocity
-            CreateAndShoot(bulletOriginal, 0, gameObject);
+            if (playerInputs.isFirePressed)
+            {
+                //instantiate bullet and set velocity
+                CreateAndShoot(bulletOriginal, 0, gameObject);
+            }
+        }
+        else
+        {
         }
     }
 
