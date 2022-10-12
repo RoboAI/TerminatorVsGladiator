@@ -9,9 +9,10 @@ public class PlayerFire : MonoBehaviour
     private PlayerInputs playerInputs;
 
     GameObject bulletOriginal;
-    public float bulletSpeed = 1f;
-    public float x_offset = 1;
-    public float y_vector = 1;
+    public float bulletSpeed = 3f;
+    public float x_offset = 1.0f;
+    public float y_vector = 2.5f;
+    public float down_force = 8.0f;
 
 
     // Start is called before the first frame update
@@ -28,25 +29,25 @@ public class PlayerFire : MonoBehaviour
         if (playerInputs.isFirePressed)
         {
             //instantiate bullet and set velocity
-            CreateAndShoot(bulletOriginal, 9, gameObject);
+            CreateAndShoot(bulletOriginal, 0, gameObject);
         }
     }
 
     private void FixedUpdate()
     {
-        //----------------------------------------------------------------------------------------
-        // Vector3 thisPlayerVector = gameObject.transform.position;
-        // Vector3 otherPlayerVector = GetOtherPlayer(gameObject).transform.position;
+        //----------------------------------------------------------------------------------------/
+        //Vector3 thisPlayerVector = gameObject.transform.position;
+        //Vector3 otherPlayerVector = GetOtherPlayer(gameObject).transform.position;
 
-        // Vector3 bulletFinalVector = (thisPlayerVector - otherPlayerVector);
-        // bulletFinalVector.y = 0;
-        // bulletFinalVector.Normalize();
-        // bulletFinalVector *= -1;//'z' axis may not need to be inverted??
+        //Vector3 bulletFinalVector = (thisPlayerVector - otherPlayerVector);
+        //bulletFinalVector.y = 0;
+        //bulletFinalVector.Normalize();
+        //bulletFinalVector *= -1;//'z' axis may not need to be inverted??
 
-        // //string s = rb.velocity.x.ToString() + "\n" + rb.velocity.y.ToString() + "\n" + rb.velocity.z.ToString();
-        // string s = bulletFinalVector.x.ToString() + "\n" + bulletFinalVector.y.ToString() + "\n" + bulletFinalVector.z.ToString();
-        // GameObject.Find("TextTemp").GetComponent<TextMeshProUGUI>().SetText(s);
-         //----------------------------------------------------------------------------------------
+        //string s = rb.velocity.x.ToString() + "\n" + rb.velocity.y.ToString() + "\n" + rb.velocity.z.ToString();
+        //string s = bulletFinalVector.x.ToString() + "\n" + bulletFinalVector.y.ToString() + "\n" + bulletFinalVector.z.ToString();
+        //GameObject.Find("TextTemp").GetComponent<TextMeshProUGUI>().SetText(s);
+        //----------------------------------------------------------------------------------------/
     }
 
     public void CreateAndShoot(GameObject bullet, int layer, GameObject playerRequestingShoot/*not used*/)
@@ -60,16 +61,15 @@ public class PlayerFire : MonoBehaviour
 
         instBullet.name = "Bullet";
         instBullet.tag = "Bullet";//used for collisions
-        instBullet.layer = layer;
+        instBullet.layer = GetOtherPlayer(playerRequestingShoot).layer;
         instRB.useGravity = true;
 
         instBullet.AddComponent<Bullet>();
-        instBullet.GetComponent<Collider>().enabled = true;
-        instBullet.GetComponent<ConstantForce>().force = Vector3.down * 10;
+        instBullet.GetComponent<ConstantForce>().force = Vector3.down * down_force;
 
         Vector3 bulletDirection = GetBulletNormalisedDirection();
 
-        instBullet.transform.position = new Vector3(playerTransform.x + (bulletDirection.x * x_offset), playerTransform.y, playerTransform.z);
+        instBullet.transform.position = new Vector3(playerTransform.x + (bulletDirection.x * x_offset), playerTransform.y + 0.25f, playerTransform.z);
 
         bulletDirection.x *= bulletSpeed;
         bulletDirection.y += y_vector;
@@ -77,6 +77,8 @@ public class PlayerFire : MonoBehaviour
 
         //fire
         instRB.AddForce(bulletDirection, ForceMode.Impulse);
+
+        instBullet.GetComponent<SphereCollider>().enabled = true;
     }
 
     GameObject GetOtherPlayer(GameObject player)

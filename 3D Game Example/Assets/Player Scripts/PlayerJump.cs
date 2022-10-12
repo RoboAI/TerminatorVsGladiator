@@ -7,7 +7,7 @@ public class PlayerJump : MonoBehaviour
     public Rigidbody rb;
     private PlayerInputs playerInputs;
     public int maxJumpCount = 1;
-    public float jumpForce = 13;
+    public float jumpForce = 26;
     public float velocityModulus = 5f;
 
     public int hasJumped = 0;

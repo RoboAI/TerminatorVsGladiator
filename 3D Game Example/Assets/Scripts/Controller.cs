@@ -38,7 +38,9 @@ public class Controller : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //gameOver = GameObject.Find("GameOverPanel").GetComponent<GameOver>();
+        gameOver = GameObject.Find("GameOverImage").GetComponent<GameEndedImage>();
+        gameTimesUp = GameObject.Find("TimesUpImage").GetComponent<GameEndedImage>();
+        gamePaused = GameObject.Find("PausedImage").GetComponent<GameEndedImage>();
         gameOver.Hide();
         gameTimesUp.Hide();
         gamePaused.Hide();
@@ -63,7 +65,7 @@ public class Controller : MonoBehaviour
         Player2_HealthBar = GameObject.Find("Player2_Health").GetComponent<HealthBar>();
         Player2_HealthBar.iAmBarOnLeft = false;
         Player2_HealthBar.playerData = Player2.GetComponent<PlayerData>();
-        Player2.GetComponent<PlayerInputs>().AssignKeys(KeyCode.LeftArrow, KeyCode.RightArrow, KeyCode.UpArrow, KeyCode.KeypadEnter);
+        Player2.GetComponent<PlayerInputs>().AssignKeys(KeyCode.LeftArrow, KeyCode.RightArrow, KeyCode.UpArrow, KeyCode.O);
         Player2.GetComponent<PlayerData>().healthBar = Player2_HealthBar;
 
         gameRoundTimer = GameObject.Find("TimeDisplay").GetComponent<GameRoundTimer>();
@@ -150,6 +152,7 @@ public class Controller : MonoBehaviour
         while (true)
         {
            jump.TryJump2();
+            Debug.Log("Player won finished ");
             yield return null;
         }
 
