@@ -4499,7 +4499,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
   maxJumpCount: 1
-  jumpForce: 13
+  jumpForce: 26
   velocityModulus: 5
   hasJumped: 0
 --- !u!114 &1517503902
@@ -6289,7 +6289,7 @@ MonoBehaviour:
   KeyJump: 119
   KeyFire: 32
   isJumpPressed: 0
-  isLeftPressed: 1
+  isLeftPressed: 0
   isRightPressed: 0
   isFirePressed: 0
 --- !u!75 &1985215618
